@@ -6,6 +6,9 @@ const findAllUsers = async (req, res) => {
         .populate({
             path: 'thoughts',
             select: '-__v'
+        }).populate({
+            path: 'friends',
+            select: '-__v'
         })
         .select('-__v')
         .then(dbUserData => res.json(dbUserData))
@@ -16,6 +19,10 @@ const findUserById = async (req, res) => {
     await User.findOne({ _id: req.params.id })
         .populate({
             path: 'thoughts',
+            select: '-__v'
+        })
+        .populate({
+            path: 'friends',
             select: '-__v'
         })
         .select('-__v')
