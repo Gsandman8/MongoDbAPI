@@ -7,7 +7,7 @@ const {
     findUserFriends,
     addFriend,
     deleteFriend
- } = require('../../../controllers/userController');
+ } = require('../../../controllers/userControllers');
 
 const router = require('express').Router();
 

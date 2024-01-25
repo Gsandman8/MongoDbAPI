@@ -37,7 +37,7 @@ const createThought = async (req, res) => {
         { new: true })
 };
 
-const UpdateThought = async (req, res) => {
+const updateThought = async (req, res) => {
     await Thought.findOneAndUpdate(
         { _id: req.params.id },
         req.body,
@@ -76,5 +76,15 @@ const deleteReaction = async (req, res) => {
         { new: true, runValidators: true })
         .then(dbThoughtData => res.json(dbThoughtData))
         .catch(err => res.status(500).json(err));
+};
+
+module.exports = {
+    findThoughts,
+    findThoughtById,
+    createThought,
+    updateThought,
+    deleteThought,
+    addReaction,
+    deleteReaction
 };
 

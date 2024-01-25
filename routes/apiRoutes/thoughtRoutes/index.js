@@ -1,15 +1,15 @@
 const router = require('express').Router();
 
-const { findAllThoughts, 
+const { findThoughts, 
     findThoughtById, 
     createThought, 
     updateThought, 
     deleteThought, 
     addReaction, 
     deleteReaction } 
-    = require('../../../controllers/thoughtController');
+    = require('../../../controllers/thoughtControllers');
 
-router.get('/', findAllThoughts);
+router.get('/', findThoughts);
 
 router.get('/:id', findThoughtById);
 
