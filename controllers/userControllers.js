@@ -68,7 +68,7 @@ const deleteUser = async (req, res) => {
 }
 
 const findUserFriends = async (req, res) => {
-    await User.findById({ _id: req.params.id }).populate({"friends": "username"})
+    await User.findById({ _id: req.params.id })
     .then(dbUserData => {
         if (!dbUserData){
             return res.status(404).json({ message: 'No user found with this id' });
@@ -78,9 +78,10 @@ const findUserFriends = async (req, res) => {
 }
 
 const addFriend = async (req, res) => {
+    
     await User.findOneAndUpdate(
         { _id: req.params.id },
-        { $push: { friends: req.params.friendId } },
+        { $push: {friends : req.params.friendId}  },
         { new: true }
     )
     .then(dbUserData => {
@@ -93,6 +94,7 @@ const addFriend = async (req, res) => {
 }
 
 const deleteFriend = async (req, res) => {
+    
     await User.findOneAndUpdate(
         { _id: req.params.id },
         { $pull: { friends: req.params.friendId } },

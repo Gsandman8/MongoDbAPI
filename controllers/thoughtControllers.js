@@ -53,6 +53,14 @@ const updateThought = async (req, res) => {
 
 const deleteThought = async (req, res) => {
     await Thought.findOneAndDelete({ _id: req.params.id })
+    .then(dbThoughtData => {
+        if (!dbThoughtData) {
+            return res.status(404).json({ message: 'No thought found with this id' });
+        }
+        res.json(dbThoughtData);
+    })
+
+
 };
 
 const addReaction = async (req, res) => {
