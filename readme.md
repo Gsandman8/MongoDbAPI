@@ -7,10 +7,12 @@ Utilizies MongoDB and the associated Mongoose ORM to create and link models and 
 This is purely backend code to interact with a simple database. You can clone this repository and run the server on localhost, but as of now, there is no front-end deployment to enable user interactivity.
 
 ## Technologies Used
-MongoDB
-Mongoose
-Express.js
-Node.js
+-  MongoDB
+-  Mongoose
+-  Express.js
+-  Node.js
 
 ## Demonstration Video
+
+https://ooo.mmhmm.app/watch/z_9G8cRQidborpKsFfjKLv
 

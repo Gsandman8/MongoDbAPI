@@ -1,4 +1,4 @@
-const {User, Thought} = require('../models');
+const {User, Thought, Reaction} = require('../models');
 
 const findThoughts = async (req, res) => {
     await Thought.find({})
@@ -64,11 +64,13 @@ const deleteThought = async (req, res) => {
 };
 
 const addReaction = async (req, res) => {
+
     await Thought.findOneAndUpdate(
         { _id: req.params.id },
         { $push: { reactions: req.body } },
         { new: true, runValidators: true })
         .then(dbThoughtData => {
+            console.log(dbThoughtData);
             if (!dbThoughtData) {
                 return res.status(404).json({ message: 'No thought found with this id' });
             }
@@ -78,9 +80,11 @@ const addReaction = async (req, res) => {
 };
 
 const deleteReaction = async (req, res) => {
+    const thought = await Thought.findById(req.params.id);
+
     await Thought.findOneAndUpdate(
         { _id: req.params.id },
-        { $pull: { reactions: { reactionId: req.params.reactionId } } },
+        { $pull: { reactions: thought.reactions.reduce(reaction => (reaction._id != req.params.reactionId)) } },
         { new: true, runValidators: true })
         .then(dbThoughtData => res.json(dbThoughtData))
         .catch(err => res.status(500).json(err));
